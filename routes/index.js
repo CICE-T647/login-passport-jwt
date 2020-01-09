@@ -4,12 +4,15 @@ const passport = require("passport");
 
 const isAutenticated = (req, res, next) => {
   passport.authenticate("jwt", { session: false }, (error, user, info) => {
-    if (error) res.status(500).json({ message: error });
 
-    if (!user) res.status(401).json({ message: "No autorizado" });
+    console.log(info)
+    if (error) return res.status(500).json({message: "Hubo un error"});
+
+    if (!user) return res.status(401).json({message: "No autorizado"});
+    
+    req.user = user;
+    next();
   })(req, res, next);
-
-  next();
 };
 
 /* GET home page. */
