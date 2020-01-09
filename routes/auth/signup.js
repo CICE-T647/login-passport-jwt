@@ -3,8 +3,10 @@ const router = express.Router();
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 
+
+// El signup de la aplicación no hace uso de passport
 router.post("/", async (req, res) => {
-  console.log("Iniciando signup")
+
   const { username, password, email, name } = req.body;
 
   try {
